@@ -1,14 +1,42 @@
+
 *{
     padding: 0%;
     margin: 0%;
+    box-sizing: border-box;
+}
+.outer{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .cal{
-    background-color: orange;
-    }
+    border-radius: 4px;
+    border: rgb(204, 148, 28) solid;
+   background-color: orange;
+   display: inline-block;
+}
 .inner{
     padding: 10px;
+    
 }
 .dis{
     width: 300px;
     height: 70px;
+    font-size: 20px;
+}
+.dis::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+.cnt{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+button{
+    margin: 2px;
+    background-color: black;
+    color: white;
+    padding: 10px;
 }
