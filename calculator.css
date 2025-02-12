@@ -12,7 +12,7 @@
     align-items: center;
 }
 .cal{
-    border-radius: 4px;
+    border-radius: 8px;
     border: rgb(204, 148, 28) solid;
    background-color: black;
    display: inline-block;
@@ -22,7 +22,7 @@
     
 }
 .dis{
-    background-color: rgb(2, 65, 2);
+    background-color: rgb(79, 158, 79);
     width: 300px;
     height: 70px;
     font-size: 20px;
@@ -34,12 +34,15 @@
 }
 .cnt{
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     padding: 10px;
 }
 button{
+    border-radius: 8px;
     margin: 2px;
     background-color: white;
     color: black;
     padding: 10px;
+    font-size: medium;
+    font-weight: bold;
 }

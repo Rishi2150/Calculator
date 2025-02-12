@@ -1,59 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
     let display = document.querySelector(".dis");
     let buttons = document.querySelectorAll("button");
-    let firstInput = "";
-    let secondInput = "";
-    let operator = "";
-    let isSecondInput = false;
-    
+    let expression = "";
+
+    // Disable keyboard input
+    display.addEventListener("keydown", function (event) {
+        event.preventDefault();
+    });
+
+    // Handle button clicks
     buttons.forEach(button => {
         button.addEventListener("click", function () {
-            let value = button.textContent;
-            
-            if (!isNaN(value) || value === "0") {
-                if (isSecondInput) {
-                    secondInput += value;
-                } else {
-                    firstInput += value;
-                }
-            } else if (value === "C") {
-                firstInput = "";
-                secondInput = "";
-                operator = "";
-                isSecondInput = false;
-            } else if (value === "<=") {
-                if (isSecondInput && secondInput.length > 0) {
-                    secondInput = secondInput.slice(0, -1);
-                } else if (!isSecondInput && operator) {
-                    operator = "";
-                    isSecondInput = false;
-                } else {
-                    firstInput = firstInput.slice(0, -1);
-                }
-            } else if (value === "=") {
-                if (firstInput && secondInput && operator) {
-                    try {
-                        let result = eval(`${firstInput} ${operator} ${secondInput}`);
-                        display.value = `${firstInput} ${operator} ${secondInput} = ${result}`;
-                        firstInput = result.toString();
-                        secondInput = "";
-                        operator = "";
-                        isSecondInput = false;
-                    } catch (error) {
-                        display.value = "Error";
-                    }
-                }
-            } else {
-                if (!operator && firstInput) {
-                    operator = value;
-                    isSecondInput = true;
-                }
-            }
-            
-            if (firstInput || secondInput || operator) {
-                display.value = `${firstInput} ${operator} ${secondInput}`;
-            } else {
+            let value = this.innerText;
+
+            if (value === "C") {
+                expression = "";
                 display.value = "";
+            } else if (value === "<=") {
+                expression = expression.slice(0, -1);
+                display.value = expression;
+            } else if (value === "=") {
+                try {
+                    expression = eval(expression.replace(/x/g, "*").replace(/%/g, "/100*")) + "";
+                    display.value = expression;
+                } catch {
+                    display.value = "Error";
+                    expression = "";
+                }
+            } else {
+                if (/[0-9+\-x/%().]/.test(value)) {
+                    expression += value;
+                    display.value = expression;
+                }
             }
         });
     });
